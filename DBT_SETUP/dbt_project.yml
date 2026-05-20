@@ -1,9 +1,8 @@
-name: 'DBT_SETUP'
+name: 'dbt_setup'
 version: '1.0.0'
+config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
 profile: 'DBT_SETUP'
-
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -12,11 +11,20 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+clean-targets:
   - "target"
   - "dbt_packages"
 
 models:
-  DBT_SETUP:
-    example:
+  dbt_setup:
+    bronze:
       +materialized: table
+      +schema: bronze
+
+    silver:
+      +materialized: table
+      +schema: silver
+
+    gold:
+      +materialized: table
+      +schema: gold
